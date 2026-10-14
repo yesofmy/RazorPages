@@ -1,0 +1,93 @@
+@page
+
+@model BookStore.Pages.AboutModel
+
+@{
+    ViewBag.Title = "About";
+}
+
+
+<section class="about-page">
+
+    <div class="about-header">
+
+        <span class="section-label">
+            ABOUT THE PROJECT
+        </span>
+
+        <h1>
+            About BookStore
+        </h1>
+
+        <p>
+            BookStore is a simple ASP.NET Core Razor Pages
+            application created to demonstrate layouts,
+            Tag Helpers and model binding.
+        </p>
+
+    </div>
+
+
+
+    <div class="about-grid">
+
+
+        <div class="info-card">
+
+            <div class="card-number">
+                01
+            </div>
+
+            <h3>
+                Razor Pages
+            </h3>
+
+            <p>
+                The application uses Razor Pages to organize
+                the website into clear and reusable pages.
+            </p>
+
+        </div>
+
+
+
+        <div class="info-card">
+
+            <div class="card-number">
+                02
+            </div>
+
+            <h3>
+                Tag Helpers
+            </h3>
+
+            <p>
+                Tag Helpers are used to create forms,
+                links, input fields and selection lists.
+            </p>
+
+        </div>
+
+
+
+        <div class="info-card">
+
+            <div class="card-number">
+                03
+            </div>
+
+            <h3>
+                Model Binding
+            </h3>
+
+            <p>
+                Form data is automatically transferred
+                to the C# model using BindProperty.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>

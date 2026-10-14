@@ -1,0 +1,197 @@
+﻿@page
+
+@model BookStore.Pages.IndexModel
+
+@{
+    ViewBag.Title = "Home";
+}
+
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="hero-label">
+            DIGITAL BOOKSTORE
+        </span>
+
+        <h1>
+            Discover Your
+            <span>Next Book</span>
+        </h1>
+
+        <p>
+            Add books to your collection and manage
+            their information in one simple place.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<section class="content-section">
+
+    <div class="section-heading">
+
+        <span class="section-label">
+            BOOK MANAGEMENT
+        </span>
+
+        <h2>
+            Add a New Book
+        </h2>
+
+        <p>
+            Enter the book information and select
+            its publisher.
+        </p>
+
+    </div>
+
+
+
+    <div class="form-card">
+
+        <form method="post"
+              asp-antiforgery="true">
+
+
+            <div asp-validation-summary="ModelOnly"
+                 class="validation-summary">
+            </div>
+
+
+            <div class="form-group">
+
+                <label asp-for="Book.Title">
+                    Book Title
+                </label>
+
+                <input asp-for="Book.Title"
+                       class="form-control"
+                       placeholder="Enter book title" />
+
+                <span asp-validation-for="Book.Title"
+                      class="validation-message">
+                </span>
+
+            </div>
+
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label asp-for="Book.Price">
+                        Price
+                    </label>
+
+
+                    <div class="input-with-symbol">
+
+                        <span>$</span>
+
+                        <input asp-for="Book.Price"
+                               class="form-control"
+                               type="number"
+                               step="0.01"
+                               placeholder="0.00" />
+
+                    </div>
+
+
+                    <span asp-validation-for="Book.Price"
+                          class="validation-message">
+                    </span>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label asp-for="Book.PublisherId">
+                        Publisher
+                    </label>
+
+
+                    <select asp-for="Book.PublisherId"
+                            asp-items="Model.Publishers"
+                            class="form-control">
+
+                        <option value="">
+                            Select a publisher
+                        </option>
+
+                    </select>
+
+
+                    <span asp-validation-for="Book.PublisherId"
+                          class="validation-message">
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <button type="submit"
+                    class="submit-button">
+
+                Add Book
+
+            </button>
+
+
+        </form>
+
+
+
+        @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+        {
+            <div class="success-message">
+
+                <div class="success-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <strong>
+                        Success
+                    </strong>
+
+                    <p>
+                        @Model.SuccessMessage
+                    </p>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</section>
+
+
+
+@section Footer
+{
+    <div class="custom-footer">
+
+        <p>
+            &copy; @DateTime.Now.Year BookStore
+        </p>
+
+        <span>
+            Built with ASP.NET Core Razor Pages
+        </span>
+
+    </div>
+}

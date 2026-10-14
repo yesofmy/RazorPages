@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewBag.Title - BookStore</title>
+
+    <link rel="stylesheet"
+          href="~/css/site.css" />
+
+</head>
+
+<body>
+
+    <header class="site-header">
+
+        <div class="container header-content">
+
+            <a asp-page="/Index"
+               class="logo">
+                Book<span>Store</span>
+            </a>
+
+            <nav class="navigation">
+
+                <a asp-page="/Index">
+                    Home
+                </a>
+
+                <a asp-page="/About">
+                    About
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <main class="main-content">
+
+        <div class="container">
+
+            @RenderBody()
+
+        </div>
+
+    </main>
+
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            @RenderSection("Footer", required: false)
+
+            <div class="default-footer">
+
+                <p>
+                    &copy; @DateTime.Now.Year BookStore
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
