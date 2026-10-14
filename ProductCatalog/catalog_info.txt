@@ -1,0 +1,22 @@
+PRODUCT CATALOG REPORT
+======================
+
+ProductCatalog is an educational ASP.NET Core Razor Pages application.
+
+Available products:
+
+1. Wireless Headphones - $89.99
+2. Mechanical Keyboard - $129.99
+3. Gaming Mouse - $59.99
+4. 4K Monitor - $349.99
+
+The application demonstrates:
+
+- Razor Pages
+- Route parameters
+- Route constraints
+- Page handlers
+- Dependency Injection
+- IActionResult
+- ViewData
+- File downloads

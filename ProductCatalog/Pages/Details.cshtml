@@ -1,0 +1,38 @@
+@page "{id:int}"
+@model ProductCatalog.Pages.DetailsModel
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div class="details-page">
+
+    <div class="details-card">
+
+        @if (Model.Product != null)
+        {
+            <div class="product-badge">PRODUCT DETAILS</div>
+
+            <h1>@Model.Product.Name</h1>
+
+            <div class="product-id">
+                Product ID: #@Model.Product.Id
+            </div>
+
+            <div class="details-price">
+                $@Model.Product.Price.ToString("0.00")
+            </div>
+
+            <p class="details-description">
+                This page demonstrates route parameters and dependency
+                injection in ASP.NET Core Razor Pages.
+            </p>
+
+            <a asp-page="/Index" class="btn btn-primary">
+                ← Back to Catalog
+            </a>
+        }
+
+    </div>
+
+</div>
