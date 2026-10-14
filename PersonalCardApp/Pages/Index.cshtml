@@ -1,0 +1,96 @@
+@page
+@model PersonalCardApp.Pages.IndexModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Student Business Card</title>
+
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">STUDENT.DEV</div>
+
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/Contacts">Contacts</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+
+        <section class="student-card">
+
+            <span class="badge">STUDENT PROFILE</span>
+
+            <h1>Student Business Card</h1>
+
+            <p class="description">
+                Hello! My nickname is yesofmy. I am a fourth-year student
+                interested in software development, web technologies and
+                modern computer systems.
+            </p>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+                    <strong>NAME</strong>
+                    <span>yesofmy</span>
+                </div>
+
+                <div class="info-box">
+                    <strong>GROUP</strong>
+                    <span>KNIT-43</span>
+                </div>
+
+                <div class="info-box">
+                    <strong>FIELD</strong>
+                    <span>Software Development</span>
+                </div>
+
+            </div>
+
+            <h2>About Me</h2>
+
+            <p class="description">
+                I enjoy programming and creating web applications.
+                My main interests include ASP.NET Core, C#, databases
+                and modern web development.
+            </p>
+
+            <h2>Current Information</h2>
+
+            <div class="datetime">
+
+                <div class="time-box">
+                    <strong>Date:</strong>
+                    @DateTime.Now.ToString("dd.MM.yyyy")
+                </div>
+
+                <div class="time-box">
+                    <strong>Time:</strong>
+                    @DateTime.Now.ToString("HH:mm:ss")
+                </div>
+
+            </div>
+
+            <a href="/Contacts" class="button">
+                Contact Me
+            </a>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        © 2026 Student Business Card
+    </footer>
+
+</body>
+</html>
