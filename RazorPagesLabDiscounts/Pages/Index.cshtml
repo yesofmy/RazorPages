@@ -1,0 +1,277 @@
+@page
+@model RazorPagesLab.Pages.IndexModel
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Product Calculator</title>
+
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body>
+
+    <header class="top-header">
+        <div class="header-content">
+            <div class="logo">
+                Razor<span>Calc</span>
+            </div>
+
+            <div class="header-badge">
+                ASP.NET Core Razor Pages
+            </div>
+        </div>
+    </header>
+
+
+    <main class="main-container">
+
+        <section class="hero-section">
+
+            <div class="hero-text">
+                <span class="small-title">RAZOR PAGES LAB</span>
+
+                <h1>
+                    Product Price
+                    <span>Calculator</span>
+                </h1>
+
+                <p>
+                    Enter product information and apply a discount
+                    to calculate the final price.
+                </p>
+            </div>
+
+        </section>
+
+
+        <section class="content-grid">
+
+            <!-- Calculator -->
+            <div class="calculator-card">
+
+                <div class="section-heading">
+                    <div class="icon-circle">₿</div>
+
+                    <div>
+                        <h2>Product Information</h2>
+                        <p>Enter the required product details below.</p>
+                    </div>
+                </div>
+
+
+                <form method="post">
+
+                    <div class="form-group">
+                        <label for="Product_Name">
+                            Product Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="Product_Name"
+                            name="Product.Name"
+                            value="@Model.Product.Name"
+                            placeholder="Enter product name"
+                            required />
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label for="Product_Price">
+                                Price
+                            </label>
+
+                            <div class="input-wrapper">
+                                <span class="input-symbol">$</span>
+
+                                <input
+                                    type="number"
+                                    id="Product_Price"
+                                    name="Product.Price"
+                                    value="@Model.Product.Price"
+                                    step="0.01"
+                                    min="0"
+                                    placeholder="0.00"
+                                    required />
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="Product_Category">
+                                Category
+                            </label>
+
+                            <input
+                                type="text"
+                                id="Product_Category"
+                                name="Product.Category"
+                                value="@Model.Product.Category"
+                                placeholder="e.g. Electronics"
+                                required />
+                        </div>
+
+                    </div>
+
+
+                    <div class="discount-section">
+
+                        <label for="discount">
+                            Discount
+                        </label>
+
+                        <div class="discount-input">
+                            <input
+                                type="number"
+                                id="discount"
+                                name="discount"
+                                min="0"
+                                max="100"
+                                step="0.01"
+                                placeholder="15"
+                                required />
+
+                            <span>%</span>
+                        </div>
+
+                    </div>
+
+
+                    <input
+                        type="submit"
+                        value="Calculate Final Price"
+                        class="calculate-button" />
+
+                </form>
+
+            </div>
+
+
+            <!-- Result -->
+            <div class="result-card">
+
+                <div class="result-header">
+                    <span class="result-icon">✓</span>
+
+                    <div>
+                        <h2>Calculation Result</h2>
+                        <p>Your final price will appear here.</p>
+                    </div>
+                </div>
+
+
+                @if (Model.IsCalculated)
+                {
+                    <div class="calculated-result">
+
+                        <span class="result-caption">
+                            FINAL PRICE
+                        </span>
+
+                        <div class="final-price">
+                            $@Model.FinalPrice.ToString("F2")
+                        </div>
+
+                        <div class="result-message">
+                            @Model.Message
+                        </div>
+
+                    </div>
+                }
+                else
+                {
+                    <div class="empty-result">
+
+                        <div class="empty-icon">%</div>
+
+                        <h3>Ready to calculate</h3>
+
+                        <p>
+                            Fill in the product information
+                            and click the button to see the result.
+                        </p>
+
+                    </div>
+                }
+
+            </div>
+
+        </section>
+
+
+        <!-- Request Headers -->
+        <section class="headers-card">
+
+            <div class="headers-title">
+
+                <div>
+                    <span class="small-title">REQUEST CONTEXT</span>
+
+                    <h2>System Information</h2>
+
+                    <p>
+                        Information received from the current HTTP request.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Header</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var header in Request.Headers)
+                        {
+                            if (header.Key == "User-Agent" ||
+                                header.Key == "Host")
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>@header.Key</strong>
+                                    </td>
+
+                                    <td class="header-value">
+                                        @header.Value
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>
+            RazorCalc &copy; 2026
+            <span>•</span>
+            ASP.NET Core Razor Pages
+        </p>
+    </footer>
+
+</body>
+</html>
