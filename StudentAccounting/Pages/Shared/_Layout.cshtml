@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Student Accounting</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" asp-page="/Index">
+                <span class="brand-mark">✦</span>
+                <span>StudentAccounting</span>
+            </a>
+            <span class="header-caption">Student Management System</span>
+        </div>
+    </header>
+
+    <main class="page-container">
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        StudentAccounting · Student Management System
+    </footer>
+</body>
+</html>

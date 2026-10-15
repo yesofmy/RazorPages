@@ -1,0 +1,65 @@
+@page "{id:int}"
+@model StudentAccounting.Pages.EditModel
+
+@{
+    ViewData["Title"] = "Edit Student";
+}
+
+<div class="page-heading">
+    <div>
+        <h1>Edit Student</h1>
+        <p class="page-subtitle">
+            Update information for student #@Model.Student.Id
+        </p>
+    </div>
+</div>
+
+<section class="card form-card">
+    <div class="card-header">
+        <h2 class="card-title">Student Information</h2>
+    </div>
+
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" asp-for="Student.Id" />
+
+            <div asp-validation-summary="ModelOnly"></div>
+
+            <div class="form-group">
+                <label asp-for="Student.FullName">Full Name</label>
+                <input asp-for="Student.FullName"
+                       class="form-control"
+                       placeholder="Enter full name" />
+                <span asp-validation-for="Student.FullName"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Student.Group">Academic Group</label>
+                <input asp-for="Student.Group"
+                       class="form-control"
+                       placeholder="Enter academic group" />
+                <span asp-validation-for="Student.Group"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Student.AverageGrade">Average Grade</label>
+                <input asp-for="Student.AverageGrade"
+                       class="form-control"
+                       type="number"
+                       min="0"
+                       max="100"
+                       step="0.01" />
+                <span asp-validation-for="Student.AverageGrade"></span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    Save Changes
+                </button>
+                <a asp-page="/Index" class="btn btn-secondary">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
