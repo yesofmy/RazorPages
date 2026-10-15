@@ -1,0 +1,82 @@
+@page "{id:int}"
+@model HandmadeHub.Pages.EditModel
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<div class="form-page">
+    <a asp-page="/Details" asp-route-id="@Model.Product.Id"
+       class="back-link">← Back to Product</a>
+
+    <div class="form-heading">
+        <span class="eyebrow">CATALOG MANAGEMENT</span>
+        <h1>Edit Product<span>.</span></h1>
+        <p>Update the product details and save your changes.</p>
+    </div>
+
+    <form method="post" enctype="multipart/form-data"
+          asp-route-id="@Model.Product.Id" class="product-form">
+        <input type="hidden" asp-for="Product.Id" />
+
+        <div asp-validation-summary="ModelOnly"
+             class="validation-summary"></div>
+
+        <div class="field">
+            <label asp-for="Product.Title"></label>
+            <input asp-for="Product.Title" />
+            <span asp-validation-for="Product.Title"
+                  class="field-error"></span>
+        </div>
+
+        <div class="field">
+            <label asp-for="Product.Category"></label>
+            <select asp-for="Product.Category"
+                    asp-items="Model.Categories"></select>
+            <span asp-validation-for="Product.Category"
+                  class="field-error"></span>
+        </div>
+
+        <div class="field">
+            <label asp-for="Product.Price"></label>
+            <div class="price-input">
+                <input asp-for="Product.Price" type="number"
+                       min="0.01" step="0.01" />
+                <span>₴</span>
+            </div>
+            <span asp-validation-for="Product.Price"
+                  class="field-error"></span>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.Product.ImagePath))
+        {
+            <div class="current-image">
+                <label>Current Image</label>
+                <img src="@Model.Product.ImagePath"
+                     alt="@Model.Product.Title" />
+            </div>
+        }
+
+        <div class="field">
+            <label asp-for="Upload">New Image (Optional)</label>
+            <input asp-for="Upload" type="file"
+                   accept=".jpg,.jpeg,.png,.webp" />
+            <small>Leave empty to keep the current image.</small>
+            <span asp-validation-for="Upload"
+                  class="field-error"></span>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                Save Changes ↗
+            </button>
+            <a asp-page="/Index" class="btn btn-secondary">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

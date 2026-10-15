@@ -1,0 +1,70 @@
+@page "{id:int}"
+@model HandmadeHub.Pages.DetailsModel
+
+@{
+    ViewData["Title"] = Model.Product?.Title ?? "Product";
+}
+
+@if (Model.Product != null)
+{
+    <section class="details-page">
+        <a asp-page="/Index" class="back-link">
+            ← Back to Catalog
+        </a>
+
+        <div class="details-grid">
+            <div class="details-image">
+                @if (!string.IsNullOrEmpty(Model.Product.ImagePath))
+                {
+                    <img src="@Model.Product.ImagePath"
+                         alt="@Model.Product.Title" />
+                }
+                else
+                {
+                    <div class="image-placeholder details-placeholder">✳</div>
+                }
+            </div>
+
+            <div class="details-info">
+                <span class="category-tag static-tag">
+                    @Model.Product.Category
+                </span>
+
+                <span class="eyebrow">HANDMADE HUB · CATALOG</span>
+
+                <h1>@Model.Product.Title<span>.</span></h1>
+
+                <p class="details-description">
+                    A material for your creative ideas.
+                    Make something special with your own hands.
+                </p>
+
+                <div class="details-price">
+                    @Model.Product.Price.ToString("N2") UAH
+                </div>
+
+                <div class="details-meta">
+                    <span>Product ID</span>
+                    <strong>HH-@Model.Product.Id.ToString("D4")</strong>
+                </div>
+
+                <div class="details-actions">
+                    <a asp-page="/Edit"
+                       asp-route-id="@Model.Product.Id"
+                       class="btn btn-primary">
+                        Edit Product ↗
+                    </a>
+
+                    <a asp-page="/Index"
+                       class="btn btn-secondary">
+                        Back to Catalog
+                    </a>
+                </div>
+
+                <p class="details-note">
+                    <span>✳</span> Made for inspiration and creativity.
+                </p>
+            </div>
+        </div>
+    </section>
+}

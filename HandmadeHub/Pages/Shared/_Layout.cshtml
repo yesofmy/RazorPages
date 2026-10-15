@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] — Handmade Hub</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>    
+    <header class="site-header">
+        <div class="nav-wrap">
+            <a class="brand" asp-page="/Index">
+                <span class="brand-icon">✳</span>
+                <span>
+                    handmade<span class="brand-light">hub</span>
+                    <small>MAKE IT YOURS</small>
+                </span>
+            </a>
+
+            <nav class="main-nav">
+                <a asp-page="/Index">Catalog</a>
+                <a asp-page="/Create" class="nav-add">+ Add Product</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <strong>Handmade Hub</strong>
+            <p>Матеріали для твоїх творчих ідей.</p>
+        </div>
+        <span>© @DateTime.Now.Year Handmade Hub</span>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
