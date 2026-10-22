@@ -1,0 +1,83 @@
+@page
+@model IdentitySecurityLab.Pages.AdminPanel.IndexModel
+
+@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-topline">
+            <span class="eyebrow">
+                <span class="status-dot"></span>
+                RESTRICTED AREA
+            </span>
+            <span class="role-badge">ADMINISTRATOR</span>
+        </div>
+
+        <h1 class="hero-title">
+            Admin Panel<span class="accent-dot">.</span>
+        </h1>
+        <p class="hero-description">
+            Welcome to the administrative workspace.
+            This page is protected by ASP.NET Core role-based authorization.
+        </p>
+    </div>
+</section>
+
+<section class="container dashboard-section">
+    <div class="section-heading">
+        <div>
+            <p class="section-kicker">ADMINISTRATION</p>
+            <h2>Security overview</h2>
+        </div>
+        <span class="status-pill">
+            <span class="status-dot"></span> Access granted
+        </span>
+    </div>
+
+    <div class="dashboard-grid">
+        <article class="dashboard-card">
+            <div class="card-icon icon-blue">♙</div>
+            <p class="card-label">Current administrator</p>
+            <h3 class="admin-email">@User.Identity?.Name</h3>
+            <p class="card-description">
+                Authenticated account with the Admin role.
+            </p>
+        </article>
+
+        <article class="dashboard-card">
+            <div class="card-icon icon-purple">◇</div>
+            <p class="card-label">Authorization</p>
+            <h3>Role-based</h3>
+            <p class="card-description">
+                Access is restricted using the Authorize attribute.
+            </p>
+        </article>
+
+        <article class="dashboard-card">
+            <div class="card-icon icon-green">✓</div>
+            <p class="card-label">Form security</p>
+            <h3>Antiforgery</h3>
+            <p class="card-description">
+                Razor Pages protects applicable POST forms against CSRF.
+            </p>
+        </article>
+    </div>
+
+    <div class="profile-panel admin-notice">
+        <div class="card-icon icon-blue">i</div>
+        <div class="profile-details">
+            <h3>Administrator access is active</h3>
+            <p>
+                This page is available only to users assigned to the Admin role.
+                Standard users should not be able to access it.
+            </p>
+        </div>
+    </div>
+
+    <a class="btn-outline-custom back-link"
+       asp-page="/Index">
+        ← Back to overview
+    </a>
+</section>

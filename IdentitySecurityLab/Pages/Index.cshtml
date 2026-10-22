@@ -1,0 +1,153 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Overview";
+    var signedIn = User.Identity?.IsAuthenticated == true;
+    var admin = signedIn && User.IsInRole("Admin");
+}
+
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-topline">
+            <span class="eyebrow"><span class="status-dot"></span> IDENTITY MANAGEMENT</span>
+            <span class="environment-label">LOCAL ENVIRONMENT</span>
+        </div>
+
+        @if (signedIn)
+        {
+            <h1 class="hero-title">
+                Welcome back<span class="accent-dot">.</span>
+            </h1>
+            <p class="hero-description">
+                Your account is active. Manage your access and explore your security dashboard.
+            </p>
+        }
+        else
+        {
+            <h1 class="hero-title">
+                Security starts<br />with <span class="gradient-text">identity.</span>
+            </h1>
+            <p class="hero-description">
+                A secure authentication platform built with ASP.NET Core Identity.
+                Create an account to get started.
+            </p>
+        }
+
+        @if (!signedIn)
+        {
+            <div class="hero-actions">
+                <a class="btn-primary-custom btn-large"
+                   asp-area="Identity" asp-page="/Account/Register">
+                    Create your account <span>→</span>
+                </a>
+                <a class="btn-outline-custom btn-large"
+                   asp-area="Identity" asp-page="/Account/Login">
+                    Sign in
+                </a>
+            </div>
+        }
+    </div>
+</section>
+
+<section class="container dashboard-section">
+    <div class="section-heading">
+        <div>
+            <p class="section-kicker">YOUR WORKSPACE</p>
+            <h2>Account overview</h2>
+        </div>
+        @if (signedIn)
+        {
+            <span class="status-pill">
+                <span class="status-dot"></span> Authenticated
+            </span>
+        }
+        else
+        {
+            <span class="status-pill status-pill-muted">Guest access</span>
+        }
+    </div>
+
+    <div class="dashboard-grid">
+        <article class="dashboard-card">
+            <div class="card-icon icon-blue">◎</div>
+            <p class="card-label">Account</p>
+            <h3>@(signedIn ? "Signed in" : "Not signed in")</h3>
+            <p class="card-description">
+                @(signedIn
+                    ? "Your identity has been verified for this session."
+                    : "Sign in to access your account.")
+            </p>
+        </article>
+
+        <article class="dashboard-card">
+            <div class="card-icon icon-purple">◇</div>
+            <p class="card-label">Access level</p>
+            <h3>@(admin ? "Administrator" : signedIn ? "Standard user" : "Public")</h3>
+            <p class="card-description">
+                @(admin
+                    ? "You have administrative permissions."
+                    : "Your access is limited to standard user features.")
+            </p>
+        </article>
+
+        <article class="dashboard-card">
+            <div class="card-icon icon-green">✓</div>
+            <p class="card-label">Authentication</p>
+            <h3>Identity enabled</h3>
+            <p class="card-description">
+                User management and cookie-based authentication are configured.
+            </p>
+        </article>
+    </div>
+
+    @if (signedIn)
+    {
+        <div class="profile-panel">
+            <div class="profile-avatar">
+                @(User.Identity?.Name?.Substring(0, 1).ToUpperInvariant() ?? "U")
+            </div>
+            <div class="profile-details">
+                <p class="card-label">CURRENTLY SIGNED IN AS</p>
+                <h3>@User.Identity?.Name</h3>
+                <p>Your session is active in this browser.</p>
+            </div>
+            <div class="profile-actions">
+                @if (admin)
+                {
+                    <a class="btn-primary-custom"
+                       asp-page="/AdminPanel/Index">
+                        Open Admin Panel →
+                    </a>
+                }
+                else
+                {
+                    <span class="role-badge">STANDARD USER</span>
+                }
+            </div>
+        </div>
+    }
+
+    <div class="feature-heading">
+        <p class="section-kicker">PLATFORM FEATURES</p>
+        <h2>Everything in one place</h2>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-item">
+            <span class="feature-number">01</span>
+            <h3>Secure authentication</h3>
+            <p>Identity-based sign-in with protected authentication cookies.</p>
+        </div>
+        <div class="feature-item">
+            <span class="feature-number">02</span>
+            <h3>Access control</h3>
+            <p>Role-based authorization protects administrative resources.</p>
+        </div>
+        <div class="feature-item">
+            <span class="feature-number">03</span>
+            <h3>Protected forms</h3>
+            <p>Razor Pages antiforgery validation helps protect POST requests.</p>
+        </div>
+    </div>
+</section>

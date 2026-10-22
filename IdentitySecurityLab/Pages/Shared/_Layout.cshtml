@@ -1,0 +1,109 @@
+﻿@using Microsoft.AspNetCore.Identity
+@{
+    var isAuthenticated = User.Identity?.IsAuthenticated == true;
+    var isAdmin = isAuthenticated && User.IsInRole("Admin");
+    var currentPage = ViewContext.RouteData.Values["page"]?.ToString() ?? "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Identity Security</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="app-body">
+    <header class="app-header">
+        <nav class="navbar navbar-expand-lg app-navbar">
+            <div class="container">
+                <a class="navbar-brand brand" asp-area="" asp-page="/Index">
+                    <span class="brand-icon">
+                        <i class="bi bi-shield-lock"></i>◆
+                    </span>
+                    <span>Identity<span class="brand-accent">Security</span></span>
+                </a>
+
+                <button class="navbar-toggler nav-toggle" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavigation"
+                        aria-controls="mainNavigation"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavigation">
+                    <ul class="navbar-nav me-auto ms-lg-4">
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPage == "/Index" ? "active" : "")"
+                               asp-area="" asp-page="/Index">
+                                Overview
+                            </a>
+                        </li>
+
+                        @if (isAdmin)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link @(currentPage.Contains("AdminPanel") ? "active" : "")"
+                                   asp-area="" asp-page="/AdminPanel/Index">
+                                    Admin Panel
+                                </a>
+                            </li>
+                        }
+                    </ul>
+
+                    <div class="nav-account">
+                        @if (isAuthenticated)
+                        {
+                            <div class="user-chip">
+                                <span class="user-avatar">
+                                    @(User.Identity?.Name?.Substring(0, 1).ToUpperInvariant() ?? "U")
+                                </span>
+                                <span class="user-email-nav">@User.Identity?.Name</span>
+                                @if (isAdmin)
+                                {
+                                    <span class="role-badge">ADMIN</span>
+                                }
+                            </div>
+
+                            <form method="post"
+                                  asp-area="Identity"
+                                  asp-page="/Account/Logout">
+                                <button class="btn-signout" type="submit">
+                                    Sign out
+                                </button>
+                            </form>
+                        }
+                        else
+                        {
+                            <a class="nav-login"
+                               asp-area="Identity"
+                               asp-page="/Account/Login">Sign in</a>
+                            <a class="btn-primary-custom"
+                               asp-area="Identity"
+                               asp-page="/Account/Register">Get started <span>→</span></a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="app-main">
+        @RenderBody()
+    </main>
+
+    <footer class="app-footer">
+        <div class="container footer-inner">
+            <span>© @DateTime.Now.Year Identity Security Lab</span>
+            <span><span class="footer-dot"></span> Secure authentication · ASP.NET Core</span>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
