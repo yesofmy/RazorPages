@@ -1,0 +1,22 @@
+﻿@page
+@model TaskFlow.Pages.ErrorModel
+@{
+    ViewData["Title"] = "Something went wrong";
+}
+
+<section class="error-page">
+    <div class="error-code">500</div>
+    <div class="eyebrow">UNEXPECTED ERROR</div>
+    <h1>Something went wrong<span class="heading-period">.</span></h1>
+    <p class="page-subtitle">
+        An unexpected error occurred while processing your request.
+        Please return to the dashboard and try again.
+    </p>
+
+    @if (Model.ShowRequestId)
+    {
+        <p class="request-id">Request ID: <code>@Model.RequestId</code></p>
+    }
+
+    <a asp-page="/Index" class="button button-primary">Return to dashboard</a>
+</section>

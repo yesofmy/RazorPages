@@ -1,0 +1,187 @@
+﻿@page
+@model TaskFlow.Pages.IndexModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<section class="welcome-header">
+    <div>
+        <div class="eyebrow">OVERVIEW</div>
+        <h1>Good to see you<span class="heading-period">.</span></h1>
+        <p class="page-subtitle">@ViewData["WelcomeMessage"]</p>
+    </div>
+
+    <a asp-page="/Create" class="button button-primary">
+        <span class="button-icon">＋</span>
+        Create new task
+    </a>
+</section>
+
+@if (TempData["SuccessMessage"] is string successMessage)
+{
+    <div class="success-alert" role="status">
+        <span>✓</span>
+        @successMessage
+    </div>
+}
+
+<section class="stats-grid">
+    <article class="stat-card">
+        <div class="stat-top">
+            <span class="stat-label">Total tasks</span>
+            <span class="stat-icon stat-icon-blue">▦</span>
+        </div>
+        <div class="stat-value">@Model.TotalCount</div>
+        <div class="stat-caption">Tasks in current view</div>
+    </article>
+
+    <article class="stat-card">
+        <div class="stat-top">
+            <span class="stat-label">Completed</span>
+            <span class="stat-icon stat-icon-green">✓</span>
+        </div>
+        <div class="stat-value">@Model.CompletedCount</div>
+        <div class="stat-caption">Successfully finished</div>
+    </article>
+
+    <article class="stat-card">
+        <div class="stat-top">
+            <span class="stat-label">In progress</span>
+            <span class="stat-icon stat-icon-orange">◷</span>
+        </div>
+        <div class="stat-value">@Model.PendingCount</div>
+        <div class="stat-caption">Waiting for completion</div>
+    </article>
+
+    <article class="stat-card">
+        <div class="stat-top">
+            <span class="stat-label">Completion rate</span>
+            <span class="stat-icon stat-icon-purple">↗</span>
+        </div>
+        <div class="stat-value">
+            @(Model.TotalCount == 0 ? 0 : (int)Math.Round(Model.CompletedCount * 100.0 / Model.TotalCount))<span class="stat-percent">%</span>
+        </div>
+        <div class="progress-track">
+            <div class="progress-fill"
+                 style="width: @(Model.TotalCount == 0 ? 0 : (int)Math.Round(Model.CompletedCount * 100.0 / Model.TotalCount))%">
+            </div>
+        </div>
+    </article>
+</section>
+
+<section class="content-panel">
+    <div class="panel-header">
+        <div>
+            <h2>Your tasks</h2>
+            <p class="section-description">Manage your work and keep everything on track.</p>
+        </div>
+
+        <form method="get" class="filter-form">
+            <label class="filter-label" for="priority">Priority</label>
+            <select id="priority" name="priority" class="select-control">
+                <option value="">All priorities</option>
+                <option value="High" selected="@(Model.SelectedPriority == "High")">High</option>
+                <option value="Medium" selected="@(Model.SelectedPriority == "Medium")">Medium</option>
+                <option value="Low" selected="@(Model.SelectedPriority == "Low")">Low</option>
+            </select>
+            <button class="button button-secondary" type="submit">Filter</button>
+            @if (!string.IsNullOrWhiteSpace(Model.SelectedPriority))
+            {
+                <a asp-page="/Index" class="reset-filter">Reset</a>
+            }
+        </form>
+    </div>
+
+    @if (Model.Items.Count == 0)
+    {
+        <div class="empty-state">
+            <div class="empty-icon">▦</div>
+            <h3>No tasks found</h3>
+            <p>Try another filter or create a new task to get started.</p>
+            <a asp-page="/Create" class="button button-primary">Create your first task</a>
+        </div>
+    }
+    else
+    {
+        <div class="task-table-wrap">
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>TASK</th>
+                        <th>PRIORITY</th>
+                        <th>STATUS</th>
+                        <th>CREATED</th>
+                        <th class="actions-heading">ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>
+                                <div class="table-task">
+                                    <span class="task-checkbox @(item.IsCompleted ? "checked" : "")">
+                                        @(item.IsCompleted ? "✓" : "")
+                                    </span>
+                                    <div class="table-task-text">
+                                        <a asp-page="/Details" asp-route-id="@item.Id"
+                                           class="task-name @(item.IsCompleted ? "task-name-completed" : "")">
+                                            @item.Title
+                                        </a>
+                                        <span class="task-description">
+                                            @(string.IsNullOrWhiteSpace(item.Description)
+                                                ? "No description provided"
+                                                : item.Description)
+                                        </span>
+                                        <span class="task-id">TASK-@item.Id.ToString("D3")</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="priority-badge priority-@item.Priority.ToLowerInvariant()">
+                                    <span class="priority-dot"></span>
+                                    @item.Priority
+                                </span>
+                            </td>
+                            <td>
+                                @if (item.IsCompleted)
+                                {
+                                    <span class="status-badge status-completed">
+                                        <span>✓</span> Completed
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="status-badge status-pending">
+                                        <span>◷</span> In progress
+                                    </span>
+                                }
+                            </td>
+                            <td class="date-cell">@item.CreatedAt.ToString("MMM dd, yyyy")</td>
+                            <td>
+                                <div class="row-actions">
+                                    <a asp-page="/Details" asp-route-id="@item.Id"
+                                       class="icon-action" title="View details" aria-label="View details">↗</a>
+
+                                    <form method="post" asp-page-handler="Toggle"
+                                          asp-route-id="@item.Id">
+                                        <button type="submit" class="icon-action"
+                                                title="@(item.IsCompleted ? "Reopen task" : "Complete task")"
+                                                aria-label="@(item.IsCompleted ? "Reopen task" : "Complete task")">
+                                            @(item.IsCompleted ? "↺" : "✓")
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-footer">
+            <span>Showing <strong>@Model.Items.Count</strong> task(s)</span>
+            <span>TaskFlow workspace</span>
+        </div>
+    }
+</section>

@@ -1,0 +1,109 @@
+@page "{id:int}"
+@model TaskFlow.Pages.DetailsModel
+@{
+    ViewData["Title"] = "Task details";
+}
+
+@if (Model.Item is not null)
+{
+    <div class="back-navigation">
+        <a asp-page="/Index" class="back-link">← Back to dashboard</a>
+    </div>
+
+    <section class="detail-heading">
+        <div>
+            <div class="eyebrow">TASK DETAILS / TASK-@Model.Item.Id.ToString("D3")</div>
+            <h1>@Model.Item.Title</h1>
+            <p class="page-subtitle">Review task information and download its report.</p>
+        </div>
+
+        <span class="priority-badge priority-@Model.Item.Priority.ToLowerInvariant()">
+            <span class="priority-dot"></span>
+            @Model.Item.Priority priority
+        </span>
+    </section>
+
+    <div class="details-layout">
+        <section class="content-panel detail-panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Task information</h2>
+                    <p class="section-description">General information about this task.</p>
+                </div>
+                <span class="detail-id">#@Model.Item.Id</span>
+            </div>
+
+            <div class="detail-field">
+                <span class="detail-label">Task title</span>
+                <strong>@Model.Item.Title</strong>
+            </div>
+
+            <div class="detail-field">
+                <span class="detail-label">Description</span>
+                <p class="detail-description">
+                    @(string.IsNullOrWhiteSpace(Model.Item.Description)
+                        ? "No description provided."
+                        : Model.Item.Description)
+                </p>
+            </div>
+
+            <div class="detail-field">
+                <span class="detail-label">Priority</span>
+                <span class="priority-badge priority-@Model.Item.Priority.ToLowerInvariant()">
+                    <span class="priority-dot"></span>
+                    @Model.Item.Priority
+                </span>
+            </div>
+
+            <div class="detail-field">
+                <span class="detail-label">Current status</span>
+                @if (Model.Item.IsCompleted)
+                {
+                    <span class="status-badge status-completed">✓ Completed</span>
+                }
+                else
+                {
+                    <span class="status-badge status-pending">◷ In progress</span>
+                }
+            </div>
+
+            <div class="detail-field">
+                <span class="detail-label">Attached file name</span>
+                <strong>@(Model.Item.AttachedFileName ?? "No attachment")</strong>
+            </div>
+
+            <div class="detail-field">
+                <span class="detail-label">Created at</span>
+                <strong>@Model.Item.CreatedAt.ToString("MMMM dd, yyyy · HH:mm")</strong>
+            </div>
+
+            <div class="detail-actions">
+                <a asp-page-handler="Download" asp-route-id="@Model.Item.Id"
+                   class="button button-primary">
+                    ↓ Download task report
+                </a>
+
+                <a asp-page="/Index" class="button button-secondary">
+                    Back to dashboard
+                </a>
+            </div>
+        </section>
+
+        <aside class="content-panel detail-side-panel">
+            <div class="side-panel-icon">▤</div>
+            <h3>Task report</h3>
+            <p>Export the current task information as a plain text document.</p>
+            <div class="file-preview">
+                <span class="file-icon">TXT</span>
+                <div>
+                    <strong>task-@Model.Item.Id-report.txt</strong>
+                    <span>Text document · UTF-8</span>
+                </div>
+            </div>
+            <a asp-page-handler="Download" asp-route-id="@Model.Item.Id"
+               class="button button-secondary button-full">
+                Download file
+            </a>
+        </aside>
+    </div>
+}
