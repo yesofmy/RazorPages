@@ -493,11 +493,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\programs\\github\\razorpages\\HandmadeHub\\HandmadeHub.csproj",
+      "projectUniqueName": "D:\\programs\\github\\razorpages\\handmadehub\\HandmadeHub.csproj",
       "projectName": "HandmadeHub",
-      "projectPath": "D:\\programs\\github\\razorpages\\HandmadeHub\\HandmadeHub.csproj",
+      "projectPath": "D:\\programs\\github\\razorpages\\handmadehub\\HandmadeHub.csproj",
       "packagesPath": "C:\\Users\\Vlad\\.nuget\\packages\\",
-      "outputPath": "D:\\programs\\github\\razorpages\\HandmadeHub\\obj\\",
+      "outputPath": "D:\\programs\\github\\razorpages\\handmadehub\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Vlad\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -506,6 +506,7 @@
         "net10.0"
       ],
       "sources": {
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

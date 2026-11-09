@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\programs\\github\\razorpages\\TaskFlow\\TaskFlow.csproj": {}
+    "D:\\programs\\github\\razorpages\\taskflow\\TaskFlow.csproj": {}
   },
   "projects": {
-    "D:\\programs\\github\\razorpages\\TaskFlow\\TaskFlow.csproj": {
+    "D:\\programs\\github\\razorpages\\taskflow\\TaskFlow.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\programs\\github\\razorpages\\TaskFlow\\TaskFlow.csproj",
+        "projectUniqueName": "D:\\programs\\github\\razorpages\\taskflow\\TaskFlow.csproj",
         "projectName": "TaskFlow",
-        "projectPath": "D:\\programs\\github\\razorpages\\TaskFlow\\TaskFlow.csproj",
+        "projectPath": "D:\\programs\\github\\razorpages\\taskflow\\TaskFlow.csproj",
         "packagesPath": "C:\\Users\\Vlad\\.nuget\\packages\\",
-        "outputPath": "D:\\programs\\github\\razorpages\\TaskFlow\\obj\\",
+        "outputPath": "D:\\programs\\github\\razorpages\\taskflow\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Vlad\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -20,6 +20,7 @@
           "net10.0"
         ],
         "sources": {
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

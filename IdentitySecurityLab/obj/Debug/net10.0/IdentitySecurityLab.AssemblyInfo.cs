@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IdentitySecurityLab")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0e0788b8c43a9de3f83d151c630dc05940eade51")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25ad198ef05496b2fe1a8520ba463082b0f8ba3f")]
 [assembly: System.Reflection.AssemblyProductAttribute("IdentitySecurityLab")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IdentitySecurityLab")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
